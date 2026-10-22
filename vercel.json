@@ -1,0 +1,28 @@
+{
+  "rewrites": [
+    { "source": "/(wp-admin|wp-content|wp-includes|administrator|joomla|typo3|typo3conf|umbraco|ghost|magento|phpmyadmin|pma|adminer|admin_.*)(/.*)?", "destination": "/pas-de-cms/" },
+    { "source": "/(craft/admin|admin/config|admin/login)(/.*)?", "destination": "/pas-de-cms/" },
+    { "source": "/wp-login.php", "destination": "/pas-de-cms/" },
+    { "source": "/wp-config.php", "destination": "/pas-de-cms/" },
+    { "source": "/xmlrpc.php", "destination": "/pas-de-cms/" },
+    { "source": "/admin.php", "destination": "/pas-de-cms/" },
+    { "source": "/adminer.php", "destination": "/pas-de-cms/" },
+    { "source": "/admin", "destination": "/pas-de-cms/" },
+    { "source": "/admin/", "destination": "/pas-de-cms/" },
+    { "source": "/user/login", "destination": "/pas-de-cms/" },
+    { "source": "/node/add", "destination": "/pas-de-cms/" },
+    { "source": "/downloader", "destination": "/pas-de-cms/" },
+    { "source": "/cpanel", "destination": "/pas-de-cms/" },
+    { "source": "/webmail", "destination": "/pas-de-cms/" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}
