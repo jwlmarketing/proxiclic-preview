@@ -1,0 +1,156 @@
+<!doctype html>
+<!--
+  © 2019–2026 Proxiclic-Provence. Tous droits reserves.
+  Conception & developpement : JWL Marketing (https://www.jwl-marketing.fr)
+  Depot certifie : https://copyright01.com/deposit/4742
+-->
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proxiclic-Provence — Site en cours de construction</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/images/logo.webp">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bleu: #06224E;
+    --orange: #EB6139;
+    --sable: #F2F1F1;
+    --texte-doux: rgba(6,34,78,.68);
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ font-size:17.5px; }
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Manrope', system-ui, -apple-system, sans-serif;
+    color:var(--bleu);
+    background:radial-gradient(circle at 20% 20%, rgba(235,97,57,.08), transparent 45%),
+               radial-gradient(circle at 80% 80%, rgba(6,34,78,.06), transparent 45%),
+               var(--sable);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    padding:24px;
+    transition:filter .4s ease;
+  }
+  .card{
+    max-width:520px;
+    width:100%;
+    text-align:center;
+    background:#fff;
+    border-radius:24px;
+    padding:56px 40px;
+    box-shadow:0 20px 45px -20px rgba(6,34,78,.3);
+  }
+  .logo{
+    width:64px;
+    height:64px;
+    border-radius:16px;
+    object-fit:cover;
+    margin:0 auto 28px;
+    display:block;
+  }
+  .eyebrow{
+    display:inline-block; text-transform:uppercase; letter-spacing:.14em;
+    font-size:.72rem; font-weight:700; color:var(--bleu);
+    background:rgba(6,34,78,.06); padding:6px 14px; border-radius:99px;
+    margin-bottom:20px;
+  }
+  h1{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:600;
+    font-size:1.9rem;
+    line-height:1.2;
+    margin:0 0 16px;
+    color:var(--bleu);
+  }
+  h1 em{ font-style:italic; color:var(--orange); }
+  p{ margin:0 0 8px; color:var(--texte-doux); font-size:.98rem; }
+  .spinner{
+    width:36px; height:36px; margin:28px auto 4px;
+    border:3px solid rgba(6,34,78,.12);
+    border-top-color:var(--orange);
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .contact{
+    margin-top:28px;
+    padding-top:24px;
+    border-top:1px solid rgba(6,34,78,.08);
+    font-size:.88rem;
+  }
+  .contact a{ color:var(--orange); font-weight:700; text-decoration:none; }
+
+  .unlock-toast{
+    position:fixed; left:50%; bottom:32px; transform:translate(-50%,20px);
+    background:var(--bleu); color:#fff; padding:14px 22px; border-radius:14px;
+    font-size:.9rem; font-weight:600; opacity:0; pointer-events:none;
+    transition:opacity .3s ease, transform .3s ease;
+    box-shadow:0 12px 30px -10px rgba(6,34,78,.5);
+  }
+  .unlock-toast.show{ opacity:1; transform:translate(-50%,0); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <img class="logo" src="/assets/images/logo.webp" alt="Proxiclic-Provence" onerror="this.style.display='none'">
+    <span class="eyebrow">Proxiclic-Provence</span>
+    <h1>Ce site est <em>en cours de construction</em>.</h1>
+    <p>Nous préparons quelque chose de bien pour vous.</p>
+    <p>Merci de votre patience, on revient très vite.</p>
+    <div class="spinner" aria-hidden="true"></div>
+    <div class="contact">
+      Besoin d'aide dès maintenant ?
+      <a href="tel:0699405298">06 99 40 52 98</a>
+    </div>
+  </div>
+
+  <div class="unlock-toast" id="unlockToast">Déverrouillé — bienvenue.</div>
+
+  <script>
+  (function () {
+    // Le code attendu n'est JAMAIS present ici : on envoie juste les
+    // dernieres touches tapees a /api/unlock, qui verifie cote serveur
+    // (variable d'environnement Vercel) et pose le cookie si ca correspond.
+    var BUFFER_SIZE = 12;
+    var buffer = [];
+    var pending = false;
+
+    document.addEventListener('keydown', function (e) {
+      if (pending) return;
+      var key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+      buffer.push(key);
+      if (buffer.length > BUFFER_SIZE) buffer.shift();
+
+      pending = true;
+      fetch('/api/unlock', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ seq: buffer })
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          pending = false;
+          if (data && data.ok) unlock();
+        })
+        .catch(function () { pending = false; });
+    });
+
+    function unlock() {
+      var toast = document.getElementById('unlockToast');
+      toast.classList.add('show');
+      document.body.style.filter = 'blur(2px)';
+      setTimeout(function () {
+        window.location.href = '/';
+      }, 700);
+    }
+  })();
+  </script>
+<script>window.__PREVIEW_WIDGET_SECRET__="2011";window.__PREVIEW_PR__="6";</script><script src="/widget.js"></script></body>
+</html>
