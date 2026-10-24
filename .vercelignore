@@ -1,0 +1,6 @@
+# Fichiers à ne jamais déployer publiquement sur Vercel
+# (le contenu source y serait servi tel quel, PHP non exécuté)
+server/
+.htaccess
+.gitignore
+.DS_Store
