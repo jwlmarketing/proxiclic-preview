@@ -1,0 +1,241 @@
+<!doctype html>
+<!--
+  © 2019–2026 Proxiclic-Provence. Tous droits reserves.
+  Conception & developpement : JWL Marketing (https://www.jwl-marketing.fr)
+  Depot certifie : https://copyright01.com/deposit/4742
+-->
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="/">
+<title>404 — Cette page a disparu | Proxiclic-Provence</title>
+<meta name="description" content="Page introuvable sur le site Proxiclic-Provence. Retournez à l'accueil ou contactez-nous.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/images/logo.webp">
+<link rel="stylesheet" href="assets/css/style.css?v=7">
+<style>
+  body.page-404{ background:#06224E; overflow-x:hidden; }
+
+  .glow-scene{
+    position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center;
+    padding:60px 20px; text-align:center; isolation:isolate;
+  }
+
+  /* Canvas particules en fond */
+  #particules{ position:fixed; inset:0; z-index:0; }
+
+  /* Blobs flottants animés */
+  .blob{
+    position:absolute; border-radius:50%; filter:blur(60px); opacity:.55; z-index:0;
+    animation:flotter 12s ease-in-out infinite;
+  }
+  .blob-1{ width:340px; height:340px; background:#EB6139; top:-80px; left:-100px; animation-duration:14s; }
+  .blob-2{ width:260px; height:260px; background:#1361b0; bottom:-60px; right:-60px; animation-duration:10s; animation-delay:-4s; }
+  .blob-3{ width:180px; height:180px; background:#EB6139; bottom:10%; left:8%; animation-duration:16s; animation-delay:-8s; opacity:.35; }
+  @keyframes flotter{
+    0%, 100%{ transform:translate(0,0) scale(1); }
+    33%{ transform:translate(30px,-40px) scale(1.08); }
+    66%{ transform:translate(-25px,25px) scale(.95); }
+  }
+
+  /* Étoiles scintillantes */
+  .etoile{
+    position:absolute; width:4px; height:4px; background:#fff; border-radius:50%;
+    animation:scintiller 2.6s ease-in-out infinite; z-index:0;
+  }
+  @keyframes scintiller{
+    0%, 100%{ opacity:.15; transform:scale(1); }
+    50%{ opacity:1; transform:scale(1.8); }
+  }
+
+  .contenu-404{ position:relative; z-index:2; max-width:640px; }
+
+  .code-404{
+    font-family:'Fraunces', Georgia, serif; font-weight:600;
+    font-size:clamp(6rem, 22vw, 11rem); line-height:1; margin:0;
+    background:linear-gradient(135deg, #ffffff 0%, #EB6139 45%, #ffffff 90%);
+    background-size:200% auto;
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:briller 3.5s linear infinite, secouer 6s ease-in-out infinite;
+    text-shadow:0 0 60px rgba(235,97,57,.35);
+    position:relative;
+  }
+  @keyframes briller{
+    to{ background-position:200% center; }
+  }
+  @keyframes secouer{
+    0%, 92%, 100%{ transform:translate(0,0) rotate(0); }
+    93%{ transform:translate(-3px,1px) rotate(-1deg); }
+    94%{ transform:translate(3px,-1px) rotate(1deg); }
+    95%{ transform:translate(-2px,2px) rotate(-.5deg); }
+    96%{ transform:translate(2px,-2px) rotate(.5deg); }
+    97%{ transform:translate(0,0) rotate(0); }
+  }
+
+  .fox-flottant{
+    width:120px; margin:-10px auto 8px; display:block;
+    filter:drop-shadow(0 12px 24px rgba(0,0,0,.35));
+    animation:planer 3.4s ease-in-out infinite;
+  }
+  @keyframes planer{
+    0%, 100%{ transform:translateY(0) rotate(-3deg); }
+    50%{ transform:translateY(-18px) rotate(3deg); }
+  }
+
+  .badge-404{
+    display:inline-block; margin-bottom:18px; padding:7px 18px; border-radius:99px;
+    background:rgba(235,97,57,.15); border:1px solid rgba(235,97,57,.4);
+    color:#ff9d78; font-size:.75rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    animation:pulser 2s ease-in-out infinite;
+  }
+  @keyframes pulser{
+    0%, 100%{ box-shadow:0 0 0 0 rgba(235,97,57,.5); }
+    50%{ box-shadow:0 0 0 10px rgba(235,97,57,0); }
+  }
+
+  .titre-404{
+    font-family:'Fraunces', Georgia, serif; color:#fff; font-size:clamp(1.4rem, 3.4vw, 2.1rem);
+    margin:6px 0 12px;
+  }
+  .texte-404{ color:#c3d6ec; font-size:1.05rem; max-width:46ch; margin:0 auto 34px; line-height:1.7; }
+
+  .actions-404{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .actions-404 .btn{ position:relative; overflow:hidden; }
+  .actions-404 .btn::after{
+    content:""; position:absolute; inset:0; background:rgba(255,255,255,.35);
+    transform:translateX(-120%) skewX(-20deg); transition:transform .5s;
+  }
+  .actions-404 .btn:hover::after{ transform:translateX(120%) skewX(-20deg); }
+
+  .btn-fantome{
+    background:transparent; border:1.5px solid rgba(255,255,255,.4); color:#fff;
+  }
+  .btn-fantome:hover{ background:rgba(255,255,255,.1); }
+
+  .recherche-404{
+    margin-top:40px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
+  }
+  .recherche-404 a{
+    font-size:.82rem; color:#8ea6c6; padding:8px 14px; border:1px solid rgba(255,255,255,.12);
+    border-radius:99px; transition:.2s;
+  }
+  .recherche-404 a:hover{ color:#fff; border-color:#EB6139; background:rgba(235,97,57,.12); }
+
+  @media (max-width:560px){
+    .code-404{ font-size:5.2rem; }
+  }
+</style>
+</head>
+<body class="page-404">
+
+<canvas id="particules"></canvas>
+
+<div class="glow-scene">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="contenu-404">
+    <img src="assets/images/logo.webp" alt="" class="fox-flottant" style="border-radius:50%; height:120px; object-fit:cover;">
+
+    <span class="badge-404">Erreur 404</span>
+    <h1 class="code-404">404</h1>
+    <h2 class="titre-404">Cette page a été débranchée puis rebranchée... en vain.</h2>
+    <p class="texte-404">
+      La page que vous cherchez n'existe pas ou a été déplacée. Pas de panique :
+      contrairement à un ordinateur en panne, celui-ci se répare en un clic.
+    </p>
+
+    <div class="actions-404">
+      <a href="" class="btn">Retour à l'accueil</a>
+      <a href="/#contact" class="btn btn-fantome">Contacter Proxiclic</a>
+    </div>
+
+    <div class="recherche-404">
+      <a href="#informatique">Dépannage</a>
+      <a href="#domicile">Domicile</a>
+      <a href="#professionnels">Professionnels</a>
+      <a href="#zones">Zones</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Étoiles scintillantes générées aléatoirement
+  const scene = document.querySelector('.glow-scene');
+  for (let i = 0; i < 40; i++) {
+    const etoile = document.createElement('div');
+    etoile.className = 'etoile';
+    etoile.style.left = Math.random() * 100 + '%';
+    etoile.style.top = Math.random() * 100 + '%';
+    etoile.style.animationDelay = (Math.random() * 3) + 's';
+    etoile.style.animationDuration = (2 + Math.random() * 2) + 's';
+    scene.appendChild(etoile);
+  }
+
+  // Fond de particules connectées (canvas léger, sans dépendance)
+  const canvas = document.getElementById('particules');
+  const ctx = canvas.getContext('2d');
+  let largeur, hauteur, particules;
+
+  function redimensionner() {
+    largeur = canvas.width = window.innerWidth;
+    hauteur = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', redimensionner);
+  redimensionner();
+
+  const NB_PARTICULES = Math.min(70, Math.floor((window.innerWidth * window.innerHeight) / 18000));
+  particules = Array.from({ length: NB_PARTICULES }, () => ({
+    x: Math.random() * largeur,
+    y: Math.random() * hauteur,
+    vx: (Math.random() - 0.5) * 0.4,
+    vy: (Math.random() - 0.5) * 0.4,
+    r: Math.random() * 1.8 + 0.6
+  }));
+
+  function animer() {
+    ctx.clearRect(0, 0, largeur, hauteur);
+    for (const p of particules) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > largeur) p.vx *= -1;
+      if (p.y < 0 || p.y > hauteur) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(195, 214, 236, 0.5)';
+      ctx.fill();
+    }
+    for (let i = 0; i < particules.length; i++) {
+      for (let j = i + 1; j < particules.length; j++) {
+        const a = particules[i], b = particules[j];
+        const dist = Math.hypot(a.x - b.x, a.y - b.y);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(235, 97, 57, ${0.12 * (1 - dist / 120)})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animer);
+  }
+  animer();
+
+  // Léger effet de parallax au mouvement de la souris sur les blobs
+  document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 26;
+    const y = (e.clientY / window.innerHeight - 0.5) * 26;
+    document.querySelectorAll('.blob').forEach((blob, i) => {
+      const facteur = (i + 1) * 0.6;
+      blob.style.marginLeft = (x * facteur) + 'px';
+      blob.style.marginTop = (y * facteur) + 'px';
+    });
+  });
+</script>
+
+<script>window.__PREVIEW_WIDGET_SECRET__="2011";window.__PREVIEW_PR__="9";</script><script src="/widget.js"></script></body>
+</html>
