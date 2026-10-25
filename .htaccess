@@ -1,0 +1,69 @@
+# Proxiclic-Provence — configuration Apache
+
+# --- Page d'erreur 404 personnalisée ---
+ErrorDocument 404 /404.html
+
+# --- Forcer HTTPS et la version www ---
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Redirige http:// vers https://
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Redirige proxiclic-provence.fr vers www.proxiclic-provence.fr
+  RewriteCond %{HTTP_HOST} ^proxiclic-provence\.fr$ [NC]
+  RewriteRule ^ https://www.proxiclic-provence.fr%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# --- "Non, ce site n'a pas de CMS" : les URLs classiques d'admin de CMS
+#     (WordPress, Joomla, Drupal, Magento, TYPO3, Umbraco, Craft, Ghost, etc.)
+#     affichent une page dédiée au lieu d'un 404 générique. Pas de redirection
+#     visible : l'URL tapée par le visiteur/bot reste affichée telle quelle. ---
+<IfModule mod_rewrite.c>
+  RewriteCond %{REQUEST_URI} ^/(wp-admin|wp-login\.php|wp-content|wp-includes|wp-config\.php|xmlrpc\.php) [NC,OR]
+  RewriteCond %{REQUEST_URI} ^/(administrator|joomla) [NC,OR]
+  RewriteCond %{REQUEST_URI} ^/(user/login|node/add|admin/config) [NC,OR]
+  RewriteCond %{REQUEST_URI} ^/(admin|admin\.php|admin/login|adminer|adminer\.php) [NC,OR]
+  RewriteCond %{REQUEST_URI} ^/(typo3|typo3conf) [NC,OR]
+  RewriteCond %{REQUEST_URI} ^/(umbraco) [NC,OR]
+  RewriteCond %{REQUEST_URI} ^/(craft|craft/admin) [NC,OR]
+  RewriteCond %{REQUEST_URI} ^/(ghost) [NC,OR]
+  RewriteCond %{REQUEST_URI} ^/(magento|admin_.*|downloader) [NC,OR]
+  RewriteCond %{REQUEST_URI} ^/(shopify|admin/oauth) [NC,OR]
+  RewriteCond %{REQUEST_URI} ^/(cpanel|webmail|phpmyadmin|pma) [NC]
+  RewriteRule ^ /pas-de-cms/ [L]
+</IfModule>
+
+# --- Désactiver l'affichage du contenu des dossiers ---
+Options -Indexes
+
+# --- Compression des fichiers texte ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+# --- Mise en cache navigateur ---
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType image/jpeg "access plus 6 months"
+  ExpiresByType image/svg+xml "access plus 6 months"
+  ExpiresByType image/webp "access plus 6 months"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# --- En-têtes de sécurité de base ---
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# --- Encodage par défaut ---
+AddDefaultCharset UTF-8
+
+# --- Ancienne adresse de la page Ordinateurs → nouvelle adresse (mot-clé « réparation ordinateur ») ---
+Redirect 301 /services/ordinateurs/ /services/reparation-ordinateur/
