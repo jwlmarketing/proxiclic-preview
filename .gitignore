@@ -1,0 +1,5 @@
+.DS_Store
+
+# Workflow brouillon/prévisualisation (généré, pas versionné)
+/prev/
+/status/
