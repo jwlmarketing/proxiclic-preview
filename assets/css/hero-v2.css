@@ -1,0 +1,287 @@
+/* Proxiclic-Provence — page d'accueil : header + hero façon maquette
+   Chargé APRÈS style.css (il surcharge ce qu'il faut, rien d'autre).
+   Couleurs relevées directement sur la maquette. */
+
+:root{
+  --px-orange:#F86000;
+  --px-orange-dark:#D95200;
+  --px-nuit:#041430;
+  --px-texte:#383C44;
+  --px-gris:#707480;
+}
+
+/* ───────────── HEADER ───────────── */
+
+.site-header.header-minimal .bar{ padding-top:10px; padding-bottom:10px; }
+
+/* Logo existant, juste plus grand (le fichier n'est pas modifié).
+   Le JPEG a beaucoup de blanc autour : les marges négatives (en % de la largeur) le rognent visuellement. */
+.site-header.header-minimal .brand{
+  flex-direction:column; align-items:flex-start; gap:0; overflow:hidden;
+}
+.site-header.header-minimal .brand span{ display:none; }
+.site-header.header-minimal .brand img{
+  width:clamp(190px, 19vw, 270px); height:auto; border-radius:0;
+  margin:-11% 0 -8.4% 0; transition:width .35s, margin .35s;
+}
+.site-header.header-minimal .brand small{
+  margin:0 0 4px 12%;
+  font-size:.7rem; font-weight:700; letter-spacing:.42em; line-height:1.1;
+  color:var(--px-orange); text-transform:uppercase;
+}
+.site-header.header-minimal.is-condensed .brand img{ width:150px; margin:-11% 0 -11% 0; }
+
+/* Menu : Accueil / Mes services / Blog */
+.site-header.header-minimal .main-nav{ gap:clamp(18px, 3vw, 44px); }
+.site-header.header-minimal .main-nav a{
+  font-size:clamp(.88rem, 1.15vw, 1.05rem); font-weight:500; color:var(--px-nuit); padding:6px 0;
+}
+.site-header.header-minimal .main-nav a::after{
+  left:-6px; bottom:-6px; height:3px; border-radius:3px; background:var(--px-orange);
+}
+.site-header.header-minimal .main-nav a:hover::after,
+.site-header.header-minimal .main-nav a.active::after{ width:calc(100% + 12px); }
+.site-header.header-minimal .main-nav a.active,
+.site-header.header-minimal .main-nav a:hover{ color:var(--px-orange); }
+
+/* Bouton Contact en orange */
+.btn.btn-outline.btn-contact{
+  background:var(--px-orange); color:#fff; border:none; border-radius:12px;
+  padding:13px 28px; font-size:.95rem; font-weight:600;
+  box-shadow:0 10px 24px -12px rgba(248,96,0,.6);
+}
+.btn.btn-outline.btn-contact:hover{ background:var(--px-orange-dark); color:#fff; transform:translateY(-1px); }
+
+/* ───────────── HERO ───────────── */
+
+.hero-nouveau{ position:relative; overflow:hidden; padding:44px 0 36px; }
+.hero-nouveau .hero-texte{ position:relative; z-index:2; }
+
+/* Pastille grise « Particuliers & Professionnels » (devenue un paragraphe) */
+.hero-nouveau .eyebrow{ margin:0 0 14px; font-size:.6rem; padding:5px 11px; }
+
+/* Titre : même police que le site (Poppins), gras, 3 lignes comme la maquette, « informatique » en orange */
+.hero-nouveau h1{
+  font-family:'Poppins', system-ui, sans-serif; font-weight:700;
+  font-size:clamp(1.6rem, 3.2vw, 2.96rem); line-height:1.08; letter-spacing:-.025em;
+  color:var(--px-nuit); margin:0 0 18px;
+}
+.hero-nouveau h1 .mot-orange{ color:var(--px-orange); }
+
+.hero-intro{
+  font-size:clamp(.85rem, 1.08vw, .96rem); line-height:1.6; color:var(--px-texte);
+  max-width:24rem; margin:0 0 10px;
+}
+/* la phrase d'accroche sous le paragraphe */
+.hero-slogan{
+  font-size:clamp(.85rem, 1.08vw, .96rem); line-height:1.6; font-weight:600; color:var(--px-nuit);
+  max-width:24rem; margin:0 0 24px;
+}
+
+/* Boutons : orange (téléphone) + blanc à bordure bleue (En savoir plus) */
+.hero-nouveau .hero-actions-v2{ gap:14px; margin-bottom:30px; }
+.hero-nouveau .btn-orange,
+.hero-nouveau .hero-actions-v2 .btn-marine{
+  border-radius:10px; padding:13px 30px; font-size:.84rem; font-weight:600;
+}
+.hero-nouveau .btn-orange{ background:var(--px-orange); box-shadow:0 12px 26px -12px rgba(248,96,0,.65); }
+.hero-nouveau .btn-orange:hover{ background:var(--px-orange-dark); }
+.hero-nouveau .hero-actions-v2 .btn-marine{
+  background:#fff; color:var(--px-nuit); border:2px solid var(--px-nuit); box-shadow:none;
+  padding:11px 28px;
+}
+.hero-nouveau .hero-actions-v2 .btn-marine:hover{ background:var(--px-nuit); color:#fff; }
+
+/* Les 3 atouts : horloge, graphique, personnes */
+.hero-atouts{ display:flex; flex-wrap:wrap; gap:18px 44px; margin:10px 0 0; }
+.hero-atouts li{ display:flex; align-items:center; gap:14px; }
+.hero-atouts svg{
+  width:44px; height:44px; flex-shrink:0; fill:none; stroke:var(--px-orange);
+  stroke-width:3.4; stroke-linecap:round; stroke-linejoin:round;
+}
+.hero-atouts strong{ display:block; font-size:.98rem; font-weight:600; color:var(--px-nuit); line-height:1.25; }
+.hero-atouts small{ display:block; font-size:.82rem; color:var(--px-gris); line-height:1.3; }
+.hero-nouveau .avis-note-hero{ margin-top:4px; gap:10px; }
+.hero-nouveau .avis-note-chiffre{ font-size:1.12rem; }
+.hero-nouveau .avis-note-detail{ font-size:.69rem; }
+
+/* Renard : le PNG a un fond blanc opaque, « multiply » le fond dans la page */
+.hero-mascotte img{
+  mix-blend-mode:multiply;
+  /* rogne le PNG à la silhouette du renard (supprime le liseré gris des bords) */
+  clip-path:inset(3.6% 21.3% 10.3% 21.4%);
+  /* le « blanc » du PNG vaut 253 (pas 255) : on le remonte à 255 pour qu'il disparaisse sur le fond */
+  filter:brightness(1.008);
+}
+@media (min-width:861px) and (max-width:1099px){
+  .hero-mascotte img{ max-width:416px; }
+}
+
+/* Grand écran : le renard est aussi grand que sur la maquette (il déborde de sa colonne, derrière le texte) */
+@media (min-width:1100px){
+  .hero-nouveau{
+    --W:min(73.6vw, 1200px);   /* largeur du renard (−20 %) */
+    --g:calc((100vw - min(100vw, 1180px)) / 2 + 24px);   /* marge latérale du container */
+  }
+  .hero-nouveau .hero-grid-v2{
+    position:relative; grid-template-columns:minmax(0, 1fr); min-height:calc(var(--W) * .48);
+  }
+  .hero-nouveau .hero-texte{ max-width:47vw; }
+  .hero-nouveau .hero-mascotte{
+    position:absolute; z-index:1; display:block; pointer-events:none;
+    width:var(--W); top:50%; transform:translateY(-50%);
+    right:calc(2vw - .22 * var(--W) - var(--g));
+  }
+  .hero-nouveau .hero-mascotte img{ width:100%; max-width:none; height:auto; }
+}
+/* un peu moins de largeur de texte sur les écrans moyens, pour ne pas toucher l'ordinateur du renard */
+@media (min-width:1100px) and (max-width:1279px){
+  .hero-nouveau .hero-texte{ max-width:42vw; }
+}
+
+/* Mobile / tablette : tout centré, renard sous le texte */
+@media (max-width:860px){
+  .hero-nouveau{ padding:28px 0 24px; }
+  .hero-intro{ margin-left:auto; margin-right:auto; }
+  .hero-atouts{ justify-content:center; text-align:left; margin-top:18px; }
+  .hero-nouveau .avis-note-hero{ justify-content:center; }
+  /* renard plus grand : on rogne son blanc autour avec des marges négatives */
+  .hero-nouveau .hero-grid-v2{ grid-template-columns:minmax(0, 1fr); }
+  .hero-nouveau .hero-mascotte{ display:block; min-width:0; }
+  .hero-nouveau .hero-mascotte img{
+    width:min(112vw, 560px); max-width:none; margin:-7% 0 -9%;
+    position:relative; left:50%; transform:translateX(-50%);   /* centré même s'il déborde */
+  }
+}
+@media (max-width:480px){
+  .site-header.header-minimal .brand img{ width:150px; }
+  .btn.btn-outline.btn-contact{ padding:11px 20px; }
+  .hero-nouveau .btn-orange,
+  .hero-nouveau .hero-actions-v2 .btn-marine{ padding-left:22px; padding-right:22px; }
+}
+
+/* ───────────── MOBILE : menu burger + bouton Contact visibles ───────────── */
+@media (max-width:860px){
+  /* le menu s'ouvre au clic sur ☰ (une règle de header-minimal le masquait en permanence) */
+  .site-header.header-minimal .main-nav.is-open{ display:flex; }
+  .site-header.header-minimal .main-nav a{ font-size:1rem; }
+  .site-header.header-minimal .main-nav a::after{ display:none; }
+  /* Contact reste visible à côté du ☰ */
+  .header-actions .btn.btn-outline.btn-contact{ display:inline-flex; padding:11px 22px; }
+  .site-header.header-minimal .brand small{ display:block; }
+}
+
+/* ───────────── MENU « MES SERVICES » DÉROULANT ───────────── */
+
+.main-nav .nav-dropdown{ position:relative; }
+.site-header.header-minimal .main-nav .nav-dropdown-toggle{ display:inline-flex; align-items:center; gap:6px; }
+.nav-dropdown-toggle svg{
+  width:.68em; height:.68em; fill:none; stroke:currentColor; stroke-width:2;
+  stroke-linecap:round; stroke-linejoin:round; transition:transform .2s;
+}
+.nav-dropdown.is-open .nav-dropdown-toggle svg{ transform:rotate(180deg); }
+
+.nav-dropdown-menu{
+  position:absolute; top:100%; left:-18px; min-width:270px; margin-top:12px; padding:10px;
+  background:#fff; border-radius:14px; border:1px solid rgba(4,20,48,.07);
+  box-shadow:0 22px 44px -18px rgba(4,20,48,.35);
+  opacity:0; visibility:hidden; transform:translateY(6px);
+  transition:opacity .18s, transform .18s, visibility .18s; z-index:70;
+}
+/* petit pont invisible pour que la liste ne se ferme pas entre le lien et le menu */
+.nav-dropdown-menu::before{ content:""; position:absolute; left:0; right:0; top:-14px; height:14px; }
+.site-header.header-minimal .main-nav .nav-dropdown-menu a{
+  display:block; padding:10px 14px; border-radius:9px; font-size:.95rem; font-weight:500;
+  color:var(--px-nuit); white-space:nowrap;
+}
+.site-header.header-minimal .main-nav .nav-dropdown-menu a::after{ display:none; }
+.site-header.header-minimal .main-nav .nav-dropdown-menu a:hover,
+.site-header.header-minimal .main-nav .nav-dropdown-menu a:focus-visible,
+.site-header.header-minimal .main-nav .nav-dropdown-menu a.active{ background:rgba(248,96,0,.09); color:var(--px-orange); }
+
+@media (min-width:861px){
+  .nav-dropdown:focus-within .nav-dropdown-menu,
+  .nav-dropdown.is-open .nav-dropdown-menu{ opacity:1; visibility:visible; transform:none; }
+}
+@media (min-width:861px) and (hover:hover){
+  .nav-dropdown:hover .nav-dropdown-menu{ opacity:1; visibility:visible; transform:none; }
+  .nav-dropdown:hover .nav-dropdown-toggle svg{ transform:rotate(180deg); }
+}
+
+/* Mobile : la liste s'ouvre comme un accordéon dans le menu */
+@media (max-width:860px){
+  .nav-dropdown-menu{
+    position:static; min-width:0; margin:0; padding:0 0 6px 14px; border:0; border-radius:0; box-shadow:none;
+    background:transparent; display:none; opacity:1; visibility:visible; transform:none;
+  }
+  .nav-dropdown-menu::before{ display:none; }
+  /* le panneau du menu burger prend toute la largeur (il était coincé dans la colonne du milieu) */
+  .site-header.header-minimal .main-nav{ grid-column:1 / 4; justify-self:stretch; }
+  .nav-dropdown.is-open .nav-dropdown-menu{ display:block; }
+  .site-header.header-minimal .main-nav .nav-dropdown-menu a{ padding:11px 0; border-radius:0; font-size:.95rem; white-space:normal; }
+  .site-header.header-minimal .main-nav .nav-dropdown-toggle{ display:flex; justify-content:space-between; width:100%; }
+}
+
+/* ───────────── PAGES SERVICES (contenu provisoire) ───────────── */
+
+.service-page{ padding:56px 0 72px; }
+.service-page-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center; }
+.service-page .eyebrow{ margin:0 0 14px; }
+.service-page h1{
+  font-family:'Poppins', system-ui, sans-serif; font-weight:700; letter-spacing:-.025em; line-height:1.1;
+  font-size:clamp(1.9rem, 4vw, 3rem); color:var(--px-nuit); margin:0 0 16px;
+}
+.service-page-intro{ font-size:1.05rem; line-height:1.6; color:var(--px-texte); max-width:30rem; margin:0 0 26px; }
+.service-page h2{
+  font-family:'Poppins', system-ui, sans-serif; font-weight:600; font-size:clamp(1.25rem, 2vw, 1.6rem);
+  line-height:1.25; color:var(--px-nuit); margin:0 0 14px;
+}
+.service-page h2 strong{ color:var(--px-orange); font-weight:700; }
+.service-page-note{ font-size:.92rem; color:var(--px-gris); max-width:30rem; margin:0 0 24px; }
+.service-page-badge{
+  display:inline-block; background:rgba(248,96,0,.12); color:var(--px-orange); font-weight:700;
+  font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; padding:3px 10px; border-radius:99px; margin-right:6px;
+}
+.service-page .hero-actions-v2{ gap:14px; margin-bottom:0; }
+.service-page .btn-orange,
+.service-page .hero-actions-v2 .btn-marine{ border-radius:10px; padding:13px 30px; font-size:.9rem; font-weight:600; }
+.service-page .btn-orange{ background:var(--px-orange); box-shadow:0 12px 26px -12px rgba(248,96,0,.65); }
+.service-page .btn-orange:hover{ background:var(--px-orange-dark); }
+.service-page .hero-actions-v2 .btn-marine{
+  background:#fff; color:var(--px-nuit); border:2px solid var(--px-nuit); box-shadow:none; padding:11px 28px;
+}
+.service-page .hero-actions-v2 .btn-marine:hover{ background:var(--px-nuit); color:#fff; }
+.service-page-image img{ width:100%; height:auto; border-radius:20px; box-shadow:0 26px 50px -26px rgba(4,20,48,.45); }
+@media (max-width:860px){
+  .service-page{ padding:28px 0 48px; }
+  .service-page-grid{ grid-template-columns:minmax(0,1fr); gap:28px; }
+  .service-page-image{ order:-1; }
+}
+
+/* Page service détaillée (récupération des données) */
+.service-detail{padding:44px 0}
+.service-detail-alt{background:#F6F7F9}
+.service-detail h2{font-family:Poppins,sans-serif;color:var(--px-nuit);font-size:clamp(1.25rem,2.2vw,1.6rem);margin:0 0 14px}
+.service-detail h3{font-family:Poppins,sans-serif;color:var(--px-nuit);font-size:1.02rem;margin:22px 0 6px}
+.service-detail p,.service-detail li{color:var(--px-texte);line-height:1.6}
+.service-detail ul{list-style:disc;padding-left:1.2em;margin:10px 0 0}
+.service-detail ol{list-style:decimal;padding-left:1.4em;margin:10px 0 0}
+.service-detail li{margin-bottom:8px}
+.service-detail li::marker{color:var(--px-orange)}
+.service-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.service-detail .hero-actions-v2{margin-top:28px}
+@media (max-width:860px){.service-detail{padding:32px 0}.service-detail-grid{grid-template-columns:minmax(0,1fr);gap:28px}}
+.service-page-image img.service-hero-visuel{ border-radius:0; box-shadow:none; mix-blend-mode:multiply; }
+
+/* Page récupération : texte + visuel centrés dans le conteneur (mêmes marges blanches à gauche et à droite) */
+.service-page-intro{ max-width:24rem; }
+.service-page h1 .mot-orange{ color:var(--px-orange); }
+.service-page:has(.service-hero-visuel) h1{ font-size:clamp(1.6rem,2.9vw,2.6rem); }
+@media (min-width:861px){
+  .service-page-grid:has(.service-hero-visuel){ grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:clamp(8px,2vw,32px); align-items:center; }
+  .service-page-image:has(.service-hero-visuel){ justify-self:end; width:100%; }
+  .service-page-image img.service-hero-visuel{ width:100%; }
+}
+@media (max-width:860px){
+  .service-page-image:has(.service-hero-visuel){ margin:0 -16px; }
+}
